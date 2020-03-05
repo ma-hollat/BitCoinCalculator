@@ -23,21 +23,20 @@ app.post('/', function(req, res){
         let price;
 
         if(currency === "EUR") {
-            price = data.bpi.EUR.rate;
+            price = data.bpi.EUR.rate_float;
             console.log("Price in EUR", price);
         }
         else{
-            price = data.bpi.USD.rate;
+            price = data.bpi.USD.rate_float;
             console.log("Price in USD", price);
         }
 
-        price.toString();
+        //price.toString();
+        result = parseFloat(price) * parseFloat(BitCoin);
+        let disclaimer = data.disclaimer;
 
-        result = price*BitCoin;
-        let diclaimer = data.diclaimer;
-
-        res.write(`${diclaimer} </br>`);
-        res.write(`You get from ${BitCoin} BitCoin - ${parseFloat(result)} ${currency}`);
+        res.write(`${disclaimer}` );
+        res.write(` You get from ${BitCoin} BitCoin - ${parseFloat(result)} ${currency}`);
         res.send();
 
     });
